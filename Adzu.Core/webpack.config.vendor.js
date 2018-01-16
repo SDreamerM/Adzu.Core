@@ -42,8 +42,8 @@ module.exports = (env) => {
         },
         plugins: [
             new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
-            new webpack.ContextReplacementPlugin(/\@angular\b.*\b(bundles|linker)/, path.join(__dirname, './ClientApp')), // Workaround for https://github.com/angular/angular/issues/11580
-            new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, path.join(__dirname, './ClientApp')), // Workaround for https://github.com/angular/angular/issues/14898
+            new webpack.ContextReplacementPlugin(/\@angular\b.*\b(bundles|linker)/, path.join(__dirname, './Client')), // Workaround for https://github.com/angular/angular/issues/11580
+            new webpack.ContextReplacementPlugin(/angular(\\|\/)core(\\|\/)@angular/, path.join(__dirname, './Client')), // Workaround for https://github.com/angular/angular/issues/14898
             new webpack.IgnorePlugin(/^vertx$/) // Workaround for https://github.com/stefanpenner/es6-promise/issues/100
         ]
     };
@@ -76,7 +76,7 @@ module.exports = (env) => {
         resolve: { mainFields: ['main'] },
         entry: { vendor: allModules.concat(['aspnet-prerendering']) },
         output: {
-            path: path.join(__dirname, 'ClientApp', 'dist'),
+            path: path.join(__dirname, 'Client', 'dist'),
             libraryTarget: 'commonjs2',
         },
         module: {
@@ -84,7 +84,7 @@ module.exports = (env) => {
         },
         plugins: [
             new webpack.DllPlugin({
-                path: path.join(__dirname, 'ClientApp', 'dist', '[name]-manifest.json'),
+                path: path.join(__dirname, 'Client', 'dist', '[name]-manifest.json'),
                 name: '[name]_[hash]'
             })
         ]
